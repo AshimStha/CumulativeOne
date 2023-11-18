@@ -1,0 +1,47 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* CSS for the index page cards */
+.card {
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+
+/* CSS for the index page */
+.content {
+    padding: 20px;
+}
+
+.search-container {
+    padding: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.search-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .search-options li {
+        margin-bottom: 5px;
+    }

@@ -1,0 +1,24 @@
+﻿<!--Using the Student model class-->﻿
+@model CumulativeOne.Models.Student
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<!--Link to go back to the students list-->
+<a class="btn btn-success mb-5" href="/Student/List">Back To Students</a>
+
+<!--Container to display the details of the student-->
+<div class="container mt-2 mb-5">
+    <div class="card w-50">
+        <h5 class="card-header"><span class="fw-bold">Student no:</span> @Model.StdNumber</h5>
+        <div class="card-body">
+            <h5 class="card-title text-danger fs-3 pb-3">@Model.StudentFname @Model.StudentLname</h5>
+            <p class="card-text"><span class="fw-bold">Student ID:</span> @Model.StudentId</p>
+            <p class="card-text"><span class="fw-bold">Enroll date:</span> @Model.EnrollDate</p>
+            <a href="#" class="btn btn-primary">Contact</a>
+        </div>
+    </div>
+</div>

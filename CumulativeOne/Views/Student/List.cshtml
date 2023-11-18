@@ -1,0 +1,21 @@
+﻿<!--Using the Student model class-->﻿
+@model IEnumerable<CumulativeOne.Models.Student>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div class="list-header fs-3 fw-bold text-danger pb-3">List of Students</div>
+
+<!--The container-->
+<div class="list-group">
+    <!--Looping through every instance of a teacher-->
+    @foreach (var student in Model)
+    {
+        <div class="list-item">
+            <!--Setting the route using the anchor tag as well as displaying the teacher details-->
+            <p class="col-md-12 list-group-item list-group-item-action w-25"><a class="text-decoration-none text-secondary" href="/Student/Show/@student.StudentId">@student.StudentFname @student.StudentLname</a></p>
+        </div>
+    }
+</div>

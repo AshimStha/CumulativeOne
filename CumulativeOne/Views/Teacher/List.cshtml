@@ -1,0 +1,26 @@
+﻿<!--Using the Teacher model class-->﻿
+@model IEnumerable<CumulativeOne.Models.Teacher>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div class="list-header fs-3 fw-bold text-danger pb-3">List of Teachers</div>
+
+<!--The container-->
+<div class="list-group">
+    <!--Form to search for a teacher-->
+    <form action="/Teacher/List" method="GET">
+        <input type="text" name="SearchKey" autocomplete="off" />
+        <input type="submit" value="Search" />
+    </form>
+    <!--Looping through every instance of a teacher-->
+    @foreach (var teacher in Model)
+    {
+        <div class="list-item">
+            <!--Setting the route using the anchor tag as well as displaying the teacher details-->
+            <p class="col-md-12 list-group-item list-group-item-action w-25 text-center"><a class="text-decoration-none text-secondary" href="/Teacher/Show/@teacher.TeacherId">@teacher.TeacherFname @teacher.TeacherLname</a></p>
+        </div>
+    }
+</div>

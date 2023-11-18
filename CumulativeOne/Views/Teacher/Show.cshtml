@@ -1,0 +1,22 @@
+﻿<!--Using the Teacher model class-->﻿
+@model CumulativeOne.Models.Teacher
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!--Link to go back to the teachers list-->
+<a class="btn btn-success mb-5" href="/Teacher/List">Back To Teachers</a>
+
+<!--Container to display the details of the teacher-->
+<div class="container mt-2 mb-5">
+    <div class="card w-50">
+        <h5 class="card-header"><span class="fw-bold">Employee no:</span> @Model.EmpNumber</h5>
+        <div class="card-body">
+            <h5 class="card-title text-danger fs-3 pb-3">@Model.TeacherFname @Model.TeacherLname</h5>
+            <p class="card-text"><span class="fw-bold">Teacher ID:</span> @Model.TeacherId</p>
+            <p class="card-text"><span class="fw-bold">Hire date:</span> @Model.HireDate</p>
+            <a href="#" class="btn btn-primary">Contact</a>
+        </div>
+    </div>
+</div>
