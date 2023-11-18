@@ -19,7 +19,13 @@ namespace CumulativeOne.Controllers
 
         // The student list page
 
-        //GET : /Student/List
+        /// <summary>
+        /// A function to return the list of students 
+        /// </summary>
+        /// <example>GET : localhost:xx/Student/List</example>
+        /// <returns>A list of students from the database</returns>
+        /// 
+
         public ActionResult List()
         {
             // The API controller returns the data for the students
@@ -35,7 +41,15 @@ namespace CumulativeOne.Controllers
 
         // The student details page
 
-        //GET : /Student/Show/{id}
+        /// <summary>
+        /// A function to return the detail page of selected student
+        /// </summary>
+        /// <param name="id">The id for the selected student</param>
+        /// <returns>
+        /// <example>GET : localhost:xx/Student/Show/{id}</example>
+        /// A detail page of the selected student using the id
+        /// </returns>
+
         public ActionResult Show(int id)
         {
             // The API controller returns the data for the students
