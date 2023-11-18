@@ -19,8 +19,16 @@ namespace CumulativeOne.Controllers
 
         // The teacher list page
 
-        //GET : /Teacher/List
-        public ActionResult List()
+        /// <summary>
+        /// A method to return the list of the teachers
+        /// </summary>
+        /// <param name="SearchKey">The key to be used to make a search</param>
+        /// <returns>
+        /// The list of the teachers
+        /// </returns>
+        /// <example>GET : localhost:xx/Teacher/List</example>
+
+        public ActionResult List(string SearchKey = null)
         {
             // The API controller returns the data for the teachers
 
@@ -28,14 +36,22 @@ namespace CumulativeOne.Controllers
             TeacherDataController controller = new TeacherDataController();
             // Using the method from the API controller to get the data and return it
             // Here, the function returns the data and stores into the list
-            IEnumerable<Teacher> Teachers = controller.ListTeachers();
+            IEnumerable<Teacher> Teachers = controller.ListTeachers(SearchKey);
             // Returning a view with the teachers data
             return View(Teachers);
         }
 
         // The teacher details page
 
-        //GET : /Teacher/Show/{id}
+        /// <summary>
+        /// A function to return the details page of a teacher
+        /// </summary>
+        /// <param name="id">The selected teacher id</param>
+        /// <returns>
+        /// A detail page of the selected teacher using the id
+        /// </returns>
+        /// <example>GET : localhost:xx/Teacher/Show/{id}</example>
+
         public ActionResult Show(int id)
         {
             // The API controller returns the data for the teachers

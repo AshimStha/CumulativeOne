@@ -20,6 +20,7 @@ namespace CumulativeOne.Controllers
         /// Returns a list of teachers from the db
         /// </summary>
         /// <example>GET localhost:xx/api/TeacherData/ListTeachers</example>
+        /// <param name="SearchKey">The key that is used to make a search</param>
         /// <returns>
         /// A list of teachers (first names and last names)
         /// </returns>
@@ -39,9 +40,10 @@ namespace CumulativeOne.Controllers
             // The sql query to fetch the teachers data from the db
             cmd.CommandText = "Select * from teachers where lower(teacherfname) like lower(@key) or lower(teacherlname) like lower(@key) or lower(concat(teacherfname, ' ', teacherlname)) like lower(@key)";
 
-            // 
+            // Defining the search key for the sql query above
             cmd.Parameters.AddWithValue("@key", "%" + SearchKey + "%");
 
+            // Creating a prepared version of the sql query
             cmd.Prepare();
 
             // Executing the query command and storing into a variable
