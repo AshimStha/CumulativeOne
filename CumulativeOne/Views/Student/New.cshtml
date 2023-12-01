@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "New Student";
+}
+
+<h2>New Student</h2>
+
+<!--Link to go back to the teachers list-->
+<a class="btn btn-secondary mb-5 mt-3" href="/Student/List">Back To Students</a>
+
+<!--Form to add a new student-->
+<form method="POST" action="/Student/Add">
+    <div class="mb-3">
+        <label for="StudentFname" class="form-label">Firstname</label>
+        <input type="text" class="form-control" id="StudentFname" aria-describedby="textHelp" name="StudentFname">
+    </div>
+    <div class="mb-3">
+        <label for="StudentLname" class="form-label">Lastname</label>
+        <input type="text" class="form-control" id="StudentLname" aria-describedby="textHelp" name="StudentLname">
+    </div>
+    <div class="mb-3">
+        <label for="StdNumber" class="form-label">Student No.</label>
+        <input type="text" class="form-control" id="StdNumber" aria-describedby="textHelp" name="StdNumber">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

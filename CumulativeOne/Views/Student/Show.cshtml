@@ -15,7 +15,14 @@
     <div class="card w-50">
         <h5 class="card-header"><span class="fw-bold">Student no:</span> @Model.StdNumber</h5>
         <div class="card-body">
-            <h5 class="card-title text-danger fs-3 pb-3">@Model.StudentFname @Model.StudentLname</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title text-danger fs-3 pb-3">@Model.StudentFname @Model.StudentLname</h5>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <a href="/Student/DeleteConfirm/@Model.StudentId" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
             <p class="card-text"><span class="fw-bold">Student ID:</span> @Model.StudentId</p>
             <p class="card-text"><span class="fw-bold">Enroll date:</span> @Model.EnrollDate</p>
             <a href="#" class="btn btn-primary">Contact</a>

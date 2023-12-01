@@ -10,6 +10,22 @@
 
 <!--The container-->
 <div class="list-group">
+    <div class="row mb-5">
+        <div class="col-6">
+            <!--Link to add a student-->
+            <a class="btn btn-primary" href="/Student/New">Add a Student</a>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <!--Link to go back to the home page-->
+            <a class="btn btn-success" href="/Home/Index">Home</a>
+        </div>
+    </div>
+    
+    <!--Form to search for a student-->
+    <form class="mb-4" action="/Student/List" method="GET">
+        <input type="text" name="SearchKey" autocomplete="off" />
+        <input type="submit" value="Search" />
+    </form>
     <!--Looping through every instance of a teacher-->
     @foreach (var student in Model)
     {

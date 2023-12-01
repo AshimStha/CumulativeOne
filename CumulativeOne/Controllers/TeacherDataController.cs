@@ -51,7 +51,7 @@ namespace CumulativeOne.Controllers
 
             // Creating a list of string data type to store the teachers name
             // Here, we are defining the type as Teacher in order to access the model methods to get or set data using object
-            List<Teacher> TeacherNames = new List<Teacher> { };
+            List<Teacher> Teachers = new List<Teacher> { };
 
             // Looping through each row of values in the variable
             // ResultSet is itself a set of items hence, we can iterate over it
@@ -62,7 +62,8 @@ namespace CumulativeOne.Controllers
                 string TeacherFName = ResultSet["teacherfname"].ToString();
                 string TeacherLName = ResultSet["teacherlname"].ToString();
                 string EmpNo = ResultSet["employeenumber"].ToString() ;
-                string HireDate = ResultSet["hiredate"].ToString();
+                DateTime HireDate = (DateTime)ResultSet["hiredate"];
+                int Salary = Convert.ToInt32(ResultSet["salary"]);
 
                 // Creating a new object instance for the teacher object
                 Teacher NewTeacher = new Teacher();
@@ -73,16 +74,17 @@ namespace CumulativeOne.Controllers
                 NewTeacher.TeacherLname = TeacherLName;
                 NewTeacher.EmpNumber = EmpNo;
                 NewTeacher.HireDate = HireDate;
+                NewTeacher.Salary = Salary;
 
                 // Adding the fetched teacher data into the string list 
-                TeacherNames.Add(NewTeacher);
+                Teachers.Add(NewTeacher);
             }
 
             // Closing the connection between the MySQL Database and the WebServer
             Conn.Close();
 
             // Returning the final list of teacher names
-            return TeacherNames;
+            return Teachers;
         }
 
 
@@ -94,6 +96,7 @@ namespace CumulativeOne.Controllers
         /// <param name="id">The primary key for the teacher in the school DB</param>
         /// <example>GET localhost:xx/api/TeacherData/FindTeacher/{id}</example>
         /// <returns>A teacher object</returns>
+        /// <returns>Teacher id, Employee number, Firstname, Lastname, Hiredate and Salary details</returns>
         [HttpGet]
 
         // Teacher here means we are trying to return a Teacher using object
@@ -113,7 +116,11 @@ namespace CumulativeOne.Controllers
 
             // The sql query to fetch the teacher data from the db with the provided id
             cmd.CommandText = "Select * from teachers where teacherid = @id";
+
+            // Parameterizing the value for security
             cmd.Parameters.AddWithValue("@id", id);
+
+            // Creating a prepared version of the sql query
             cmd.Prepare();
 
             // Executing the query command and storing into a variable
@@ -128,7 +135,8 @@ namespace CumulativeOne.Controllers
                 string TeacherFName = ResultSet["teacherfname"].ToString();
                 string TeacherLName = ResultSet["teacherlname"].ToString();
                 string EmpNo = ResultSet["employeenumber"].ToString();
-                string HireDate = ResultSet["hiredate"].ToString();
+                DateTime HireDate = (DateTime)ResultSet["hiredate"];
+                int Salary = Convert.ToInt32(ResultSet["salary"]);
 
                 // Assigning the values of the variables with the object functions as its properties in Teacher.cs model class
                 NewTeacher.TeacherId = TeacherID;
@@ -136,10 +144,141 @@ namespace CumulativeOne.Controllers
                 NewTeacher.TeacherLname = TeacherLName;
                 NewTeacher.EmpNumber = EmpNo;
                 NewTeacher.HireDate = HireDate;
+                NewTeacher.Salary = Salary;
             }
 
             // Returning the teacher data (can be many)
             return NewTeacher;
+        }
+
+
+        // Method to add a new teacher
+
+        /// <summary>
+        /// A method that allows us to create a new teacher using the form and stores it into the DB
+        /// </summary>
+        /// <param name="NewTeacher">The attributes for the new teacher from the Teacher model (A teacher object)</param>
+        /// <returns>
+        /// 
+        /// POST api/TeacherData/AddTeacher
+        /// 
+        /// The curl request below shows that we are using a POST request to pass the post object data enclosed in the ""
+        ///     curl -d "" http://localhost:61277/api/TeacherData/AddTeacher 
+        /// 
+        /// <example>
+        /// {Getting error}
+        /// Form Data: (JSON data being sent as the body of the HTTP request)
+        ///     {
+        ///         "teacherid" : "1",
+        ///         "teacherfname" : "John",
+        ///         "teacherlname" : "Doe",
+        ///         "employeenumber" : "123",
+        ///         "hiredate" : "2022-09-18",
+        ///         "salary" : "38"
+        ///     }
+        /// </example>
+        /// 
+        /// <example>
+        ///     curl -d "{\"teacherid\":\"1\",\"teacherfname\":\"John\",\"teacherlname\":\"Doe\",\"employeenumber\":\"123\",\"hiredate\":\"2022-09-18\",\"salary\":\"38\"}" -H "Content-Type: application/json" http://localhost:61277/api/TeacherData/AddTeacher
+        /// </returns>
+        /// </example>
+        /// 
+        /// <example>
+        /// Using JSON file:
+        ///     For this, we created a new folder in the project called testObject and added a new JSON file with the data. We then use the
+        ///     following curl request to execute it.
+        ///     
+        ///     curl -d @teachers.json -H "Content-Type: application/json" http://localhost:61277/api/TeacherData/AddTeacher 
+        ///     
+        ///     (-v) can be used at the end of the curl request to see more details on the request
+        /// </example>
+        /// 
+
+
+        [HttpPost]
+        [Route("api/TeacherData/AddTeacher")]
+        // The object is from the Teacher class
+        // FromBody means we are getting the data from the body of the HTTP request
+        public void AddTeacher ([FromBody] Teacher NewTeacher)
+        {
+            // Getting the current date in a variable
+            DateTime now = DateTime.Now;
+
+            // Creating a connection to the DB
+            MySqlConnection connect = School.AccessDatabase();
+
+            // Opening a connection between the DB and the web server
+            connect.Open();
+
+            // Creating a command using the connection
+            MySqlCommand command = connect.CreateCommand();
+
+            // Setting up the query
+            command.CommandText = "Insert into `teachers`(teacherfname, teacherlname, employeenumber, hiredate, salary) values (@Teacherfname, @Teacherlname, @EmpNumber, @Hiredate, @Salary)";
+
+            // Parameterization of the input values to avoid sql injection
+            // The second parameters are from the class
+            command.Parameters.AddWithValue("@Teacherfname", NewTeacher.TeacherFname);
+            command.Parameters.AddWithValue("@Teacherlname", NewTeacher.TeacherLname);
+            command.Parameters.AddWithValue("@EmpNumber", NewTeacher.EmpNumber);
+            command.Parameters.AddWithValue("@Hiredate", now);
+            command.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+
+            // Creating a prepared version of the sql query
+            command.Prepare();
+
+            // Using this function to just execute the information and not to read it and also returns the number of rows affected
+            command.ExecuteNonQuery();
+
+            // Closing the DB connection
+            connect.Close();
+        }
+
+
+        // Method to delete a teacher
+
+        /// <summary>
+        /// A method that receives and id and deletes the teacher associated with it
+        /// </summary>
+        /// <param name="teacherId">The teacher id to be deleted</param>
+        /// 
+        /// <return>
+        /// void
+        /// </return>
+        /// 
+        /// <example>
+        /// POST : api/TeacherData/DeleteTeacher/3 -> void
+        /// </example>
+        /// 
+
+
+        [HttpPost]
+        [Route("api/TeacherData/DeleteTeacher/{teacherId}")]
+        public void DeleteTeacher (int teacherId)
+        {
+            // Creating an instance of a DB connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            // Opening the connection between the web server and database
+            Conn.Open();
+
+            // Establishing a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL query for the delete process
+            cmd.CommandText = "Delete from teachers where teacherid=@id";
+
+            // Parameterization of the input values to avoid sql injection
+            cmd.Parameters.AddWithValue("@id", teacherId);
+
+            // Creating a prepared version of the sql query
+            cmd.Prepare();
+
+            // Using this function to just execute the information and not to read it and also returns the number of rows affected
+            cmd.ExecuteNonQuery();
+
+            // Closing the DB connection
+            Conn.Close();
         }
     }
 }

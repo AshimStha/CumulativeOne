@@ -13,9 +13,17 @@
     <div class="card w-50">
         <h5 class="card-header"><span class="fw-bold">Employee no:</span> @Model.EmpNumber</h5>
         <div class="card-body">
-            <h5 class="card-title text-danger fs-3 pb-3">@Model.TeacherFname @Model.TeacherLname</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title text-danger fs-3 pb-3">@Model.TeacherFname @Model.TeacherLname</h5>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <a href="/Teacher/DeleteConfirm/@Model.TeacherId" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
             <p class="card-text"><span class="fw-bold">Teacher ID:</span> @Model.TeacherId</p>
             <p class="card-text"><span class="fw-bold">Hire date:</span> @Model.HireDate</p>
+            <p class="card-text"><span class="fw-bold">Salary:</span> @Model.Salary</p>
             <a href="#" class="btn btn-primary">Contact</a>
         </div>
     </div>

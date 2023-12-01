@@ -1,0 +1,1 @@
+{"teacherid" : "0", "teacherfname" : "John", "teacherlname" : "Doe", "employeenumber" : "T606", "hiredate" : "2017-09-24 00:00:00", "salary" : "57.21"}

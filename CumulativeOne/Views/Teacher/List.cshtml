@@ -10,9 +10,20 @@
 
 <!--The container-->
 <div class="list-group">
+    <div class="row mb-5">
+        <div class="col-6">
+            <!--Link to add a teacher-->
+            <a class="btn btn-primary" href="/Teacher/New">Add a Teacher</a>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <!--Link to go back to the home page-->
+            <a class="btn btn-success" href="/Home/Index">Home</a>
+        </div>
+    </div>
+    
     <!--Form to search for a teacher-->
     <form class="mb-4" action="/Teacher/List" method="GET">
-        <input type="text" name="SearchKey" autocomplete="off" />
+        <input type="text" name="SearchKey" autocomplete="off" placeholder="Search by name" />
         <input type="submit" value="Search" />
     </form>
     <!--Looping through every instance of a teacher-->

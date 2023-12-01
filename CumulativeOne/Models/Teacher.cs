@@ -13,6 +13,7 @@ namespace CumulativeOne.Models
         public string TeacherFname { get; set; }
         public string TeacherLname { get; set; }
         public string EmpNumber { get; set; }
-        public string HireDate { get; set; }
+        public DateTime HireDate { get; set; }
+        public int Salary { get; set; }
     }
 }
