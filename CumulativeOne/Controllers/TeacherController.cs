@@ -113,6 +113,10 @@ namespace CumulativeOne.Controllers
         /// Adds the teacher and returns the list
         /// </returns>
         /// 
+        /// <example>
+        /// POST localhost:xx/Teacher/Add
+        /// </example>
+        /// 
 
         [HttpPost]
         public ActionResult Add (string TeacherFname, string TeacherLname, string EmpNumber, int Salary)
