@@ -45,3 +45,11 @@ textarea {
     .search-options li {
         margin-bottom: 5px;
     }
+
+
+/*CSS for the error messages in form*/
+.errorMsg {
+    color: red;
+    font-weight: bold;
+    display: none;
+}

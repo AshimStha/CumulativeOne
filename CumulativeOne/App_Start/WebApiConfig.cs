@@ -14,6 +14,9 @@ namespace CumulativeOne
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            // Enabling the cross origin resource sharing feature
+            config.EnableCors();
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",

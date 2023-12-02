@@ -6,25 +6,30 @@
 <h2>New Teacher</h2>
 
 <!--Link to go back to the teachers list-->
+<!--The href link to the file on the project-->
 <a class="btn btn-secondary mb-5 mt-3" href="/Teacher/List">Back To Teachers</a>
 
 <!--Form to add a new teacher-->
-<form method="POST" action="/Teacher/Add">
+<form method="POST" action="/Teacher/Add" name="teacherForm">
     <div class="mb-3">
         <label for="TeacherFname" class="form-label">Firstname</label>
         <input type="text" class="form-control" id="TeacherFname" aria-describedby="textHelp" name="TeacherFname">
+        <span class="errorMsg" id="FnameError">Invalid firstname!</span>
     </div>
     <div class="mb-3">
         <label for="TeacherLname" class="form-label">Lastname</label>
         <input type="text" class="form-control" id="TeacherLname" aria-describedby="textHelp" name="TeacherLname">
+        <span class="errorMsg" id="LnameError">Invalid lastname!</span>
     </div>
     <div class="mb-3">
         <label for="EmpNumber" class="form-label">Employee No.</label>
         <input type="text" class="form-control" id="EmpNumber" aria-describedby="textHelp" name="EmpNumber">
+        <span class="errorMsg" id="EmpNumError">Invalid employee number!</span>
     </div>
     <div class="mb-3">
         <label for="Salary" class="form-label">Salary</label>
         <input type="number" step="any" class="form-control" id="Salary" aria-describedby="textHelp" name="Salary">
+        <span class="errorMsg" id="SalaryError">Invalid salary!</span>
     </div>
     <button type="submit" class="btn btn-danger">Add Teacher</button>
 </form>

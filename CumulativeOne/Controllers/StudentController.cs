@@ -127,6 +127,10 @@ namespace CumulativeOne.Controllers
         ///     navigate to Views/Student/DeleteConfirm.cshtml
         /// </example>
         /// 
+        /// <example>
+        ///     GET localhost:xx/Student/DeleteConfirm/{id}
+        /// </example>
+        /// 
 
         [HttpGet]
         public ActionResult DeleteConfirm(int id)
@@ -152,7 +156,7 @@ namespace CumulativeOne.Controllers
         /// </returns>
         /// 
         /// <example>
-        ///     POST: localhost:xx/Student/Delete
+        ///     POST: localhost:xx/Student/Delete/{id}
         /// </example>
         /// 
 

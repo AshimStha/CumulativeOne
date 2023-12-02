@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CumulativeOne.Controllers
 {
@@ -193,10 +194,16 @@ namespace CumulativeOne.Controllers
         ///     (-v) can be used at the end of the curl request to see more details on the request
         /// </example>
         /// 
+        /// Note to Christine:
+        ///     While adding a new teacher, there sometimes occurs an error that says null data was passed for salary even though data is seen
+        ///     in the payload. I tried it multiple times where it worked most of the time but it often throws an error. I could not figure out 
+        ///     why it happens?
+        /// 
 
 
         [HttpPost]
         [Route("api/TeacherData/AddTeacher")]
+        [EnableCors(origins: "*", methods: "*", headers: "*")]
         // The object is from the Teacher class
         // FromBody means we are getting the data from the body of the HTTP request
         public void AddTeacher ([FromBody] Teacher NewTeacher)
