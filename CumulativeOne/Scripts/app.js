@@ -8,9 +8,12 @@ function AddTeacher() {
     //POST : http://localhost:xxx/api/TeacherData/AddTeacher
     //with POST data of teacherfname, teacherlname, empnumber, hiredate and salary.
 
+    // setting up the URL for the request
     var URL = "http://localhost:61277/api/TeacherData/AddTeacher/";
 
+    // creating an XML HTTP request object
     var rq = new XMLHttpRequest();
+
     // where is this request sent to?
     // is the method GET or POST?
     // what should we do with the response?
@@ -24,12 +27,12 @@ function AddTeacher() {
 
 
 
-    var AuthorData = {
+    var TeacherData = {
         "TeacherFname": teacherFname,
         "TeacherLname": teacherLname,
         "EmpNumber": teacherEmpNum,
-        "AuthorEmail": AuthorEmail,
-        "AuthorBio": AuthorBio
+        "HireDate": hireDate,
+        "Salary": teacherSalary
     };
 
 
@@ -47,6 +50,6 @@ function AddTeacher() {
 
     }
     //POST information sent through the .send() method
-    rq.send(JSON.stringify(AuthorData));
+    rq.send(JSON.stringify(TeacherData));
 
 }

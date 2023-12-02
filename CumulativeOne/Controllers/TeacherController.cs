@@ -93,7 +93,7 @@ namespace CumulativeOne.Controllers
         /// </returns>
         /// 
 
-        //GET : /Author/Ajax_New
+        //GET : /Teacher/Ajax_New
         public ActionResult Ajax_New()
         {
             return View();

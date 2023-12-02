@@ -167,7 +167,7 @@ namespace CumulativeOne.Controllers
         ///     curl -d "" http://localhost:61277/api/TeacherData/AddTeacher 
         /// 
         /// <example>
-        /// {Getting error}
+        /// {Getting error that says a positional parameter can't be found}
         /// Form Data: (JSON data being sent as the body of the HTTP request)
         ///     {
         ///         "teacherid" : "1",
