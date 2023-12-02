@@ -83,6 +83,23 @@ namespace CumulativeOne.Controllers
             return View();
         }
 
+        // Method to open the view for the AJAX add feature
+
+        /// <summary>
+        /// A method to access the view with the form to create a new teacher
+        /// </summary>
+        /// <returns>
+        /// The view with the create form
+        /// </returns>
+        /// 
+
+        //GET : /Author/Ajax_New
+        public ActionResult Ajax_New()
+        {
+            return View();
+
+        }
+
         // The method to add the new teacher 
 
         /// <summary>

@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Ajax_New";
+}
+
+<h2>New Teacher AJAX</h2>
+
+<div id="containershow">
+    <nav>
+        <a class="navlink" href="/Teacher/List">Back To Teachers</a>
+    </nav>
+    <h2>New Author</h2>
+    @{
+        /* AJAX Request to add teacher */
+        /* No form submission needed */
+        /* button onclick will handle form submission */
+        /* Each item has an ID for validation && ajax submission */
+
+
+    }
+    <section class="wrapper">
+        <h1>Add a Teacher</h1>
+
+        <!--Form to add a new teacher-->
+        <form id="add-form" method="POST" action="/Teacher/Add" name="teacherForm">
+            <div class="form-input">
+                <label for="TeacherFname" class="form-label">Firstname</label>
+                <input type="text"
+                       class="form-control"
+                       id="TeacherFname"
+                       aria-describedby="textHelp"
+                       name="TeacherFname" />
+            </div>
+
+            <div class="form-input">
+                <label for="TeacherLname" class="form-label">Lastname</label>
+                <input type="text"
+                       class="form-control"
+                       id="TeacherLname"
+                       aria-describedby="textHelp"
+                       name="TeacherLname" />
+            </div>
+
+            <div class="form-input">
+                <label for="EmpNumber" class="form-label">Employee No.</label>
+                <input type="text"
+                       class="form-control"
+                       id="EmpNumber"
+                       aria-describedby="textHelp"
+                       name="EmpNumber" />
+            </div>
+
+            <div class="form-input">
+                <label for="TeacherFname" class="form-label">Hiredate</label>
+                <input type="date"
+                       class="form-control"
+                       id="Hiredate"
+                       aria-describedby="textHelp"
+                       name="Hiredate" />
+            </div>
+
+            <div class="form-input">
+                <label for="Salary" class="form-label">Salary</label>
+                <input type="number"
+                       step="any"
+                       class="form-control"
+                       id="Salary"
+                       aria-describedby="textHelp"
+                       name="Salary" />
+            </div>
+        </form>
+        @{
+            //AddTeacher() is a JS method defined in /Scripts/app.js
+        }
+        <button id="add-btn" onclick="AddTeacher()">Add Teacher</button>
+    </section>
+
+</div>
