@@ -5,7 +5,7 @@
 
 <div id="containershow">
     <nav>
-        <a class="navlink" href="/Teacher/List">Back To Teachers</a>
+        <a class="btn btn-primary navlink" href="/Teacher/List">Back To Teachers</a>
     </nav>
     @{
         /* AJAX Request to add teacher */
@@ -19,7 +19,7 @@
         <h1>Add a Teacher</h1>
 
         <!--Form to add a new teacher-->
-        <form id="add-form" method="POST" action="/Teacher/Add" name="teacherForm">
+        <form id="add-form" name="teacherForm">
             <div class="form-input">
                 <label for="TeacherFname" class="form-label">Firstname</label>
                 <input type="text"

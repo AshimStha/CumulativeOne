@@ -272,6 +272,15 @@ namespace CumulativeOne.Controllers
             // Establishing a new command (query) for our database
             MySqlCommand cmd = Conn.CreateCommand();
 
+
+            cmd.CommandText = "DELETE FROM classes WHERE classes.teacherid = @id";
+
+            cmd.Parameters.AddWithValue("@id", teacherId);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+
             // SQL query for the delete process
             cmd.CommandText = "Delete from teachers where teacherid=@id";
 

@@ -40,12 +40,15 @@ function AddTeacher() {
     rq.setRequestHeader("Content-Type", "application/json");
     rq.onreadystatechange = function () {
         //ready state should be 4 AND status should be 200
-        if (rq.readyState == 4 && rq.status == 200) {
+        if (rq.readyState == 4 && rq.status == 204) {
             //request is successful and the request is finished
+            console.log("Successful!");
 
-            //nothing to render, the method returns nothing.
-
-
+            // redirecting back to the list
+            window.location.href = "http://localhost:61277/Teacher/List";
+        }
+        else {
+            concole.log("Unsuccessful!")
         }
 
     }

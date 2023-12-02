@@ -3,6 +3,75 @@
     ViewBag.Title = "New Teacher";
 }
 
+<!--JS for client side form validation-->
+<script>
+    window.onload = processForm;
+
+    function processForm() {
+        var formhandle = document.forms.teacherForm;
+
+        var fError = document.getElementById("FnameError");
+        var lError = document.getElementById("LnameError");
+        var EmpError = document.getElementById("EmpNumError");
+        var SalError = document.getElementById("SalaryError");
+
+        // Define a regular expression for a valid salary number
+        const numberRegex = /^\d+$/;
+
+        formhandle.onsubmit = ValidateForm;
+
+        function ValidateForm() {
+            var fInput = formhandle.TeacherFname;
+            var lInput = formhandle.TeacherLname;
+            var EmpInput = formhandle.EmpNumber;
+            var SalInput = formhandle.Salary.value;
+
+            console.log(fInput, lInput, EmpInput, SalInput);
+
+            // checking if the firstname field is null
+            if (fInput.value === "" || fInput.value == null) {
+                // setting the display to block for the error message
+                fError.style.display = "block";
+                // setting the focus on the input field
+                fInput.focus();
+                // stopping the query from moving on
+                return false;
+            }
+
+            // checking if the lastname field is null
+            if (lInput.value === "" || lInput.value == null) {
+                // setting the display to block for the error message
+                lError.style.display = "block";
+                // setting the focus on the input field
+                lInput.focus();
+                // stopping the query from moving on
+                return false;
+            }
+
+            // checking if the emp number field is null
+            if (EmpInput.value === "" || EmpInput.value == null) {
+                // setting the display to block for the error message
+                EmpError.style.display = "block";
+                // setting the focus on the input field
+                EmpInput.focus();
+                // stopping the query from moving on
+                return false;
+            }
+
+            // checking if the salary field is null
+            if (SalInput.value === "" || SalInput.value == null || (!numberRegex.test(SalInput)) || isNaN(numberField)) {
+                // setting the display to block for the error message
+                SalError.style.display = "block";
+                // setting the focus on the input field
+                SalInput.focus();
+                // stopping the query from moving on
+                return false;
+            }
+        }
+    }
+</script>
+
+
 <h2>New Teacher</h2>
 
 <!--Link to go back to the teachers list-->
@@ -31,6 +100,6 @@
         <input type="number" step="any" class="form-control" id="Salary" aria-describedby="textHelp" name="Salary">
         <span class="errorMsg" id="SalaryError">Invalid salary!</span>
     </div>
-    <button type="submit" class="btn btn-danger">Add Teacher</button>
+    <button id="teacher_submit_btn" type="submit" class="btn btn-danger">Add Teacher</button>
 </form>
 
