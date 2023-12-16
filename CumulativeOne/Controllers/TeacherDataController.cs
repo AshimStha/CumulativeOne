@@ -316,17 +316,8 @@ namespace CumulativeOne.Controllers
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
 
-        public int UpdateTeacher(int id, [FromBody] Teacher TeacherInfo)
+        public void UpdateTeacher(int id, [FromBody] Teacher TeacherInfo)
         {
-            int result = 0;
-
-            if(string.IsNullOrEmpty(TeacherInfo.TeacherFname) ||
-                string.IsNullOrEmpty(TeacherInfo.TeacherLname) ||
-                TeacherInfo.Salary < 0 || string.IsNullOrEmpty(TeacherInfo.EmpNumber)) 
-            {
-                return result;
-            }
-
             // Creating an instance of the DB connection
             MySqlConnection Conn = School.AccessDatabase();
 
@@ -350,8 +341,6 @@ namespace CumulativeOne.Controllers
 
             // Closing the DB connection
             Conn.Close();
-
-            return result;
         }
     }
 }
