@@ -23,11 +23,19 @@ This documentation outlines the features for the cumulative assignments of C#.
 
 ![The index page](Index.png)
 
+*Index Page*
+
 ![The search page](Search_page.png)
+
+*Search Page*
 
 ![Events Log](Events_log.png)
 
+*Events Log Page*
+
 ![Notification Feature](Update_Notification.png)
+
+*Notification Feature*
 
 
 ---
