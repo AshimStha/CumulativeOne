@@ -1,8 +1,8 @@
-# CumulativeTwo
+# Cumulative
 
 **Overview**
 
-This documentation outlines the server-rendered cycles that occur when a teacher is added or removed from the system.
+This documentation outlines the features for the cumulative assignments of C#.
 
 ---
 
@@ -16,11 +16,19 @@ This documentation outlines the server-rendered cycles that occur when a teacher
 
 ![Server Render Cycle while updating teacher](Teacher_Update.png)
 
+
 ---
 
-## Conclusion
+## Wireframes for possible features in the project
 
-This comprehensive documentation covers the steps of the server-rendered cycles involved in adding or removing a teacher from the system. The explanation supports user interactions and the server-side processes required to maintain data consistency and deliver an intuitive and coherent user experience.
+![The index page](Index.png)
+
+![The search page](Search_page.png)
+
+![Events Log](Events_log.png)
+
+![Notification Feature](Update_Notification.png)
+
 
 ---
 
@@ -30,3 +38,15 @@ This comprehensive documentation covers the steps of the server-rendered cycles 
 2. JS validation while inserting a teacher using the form.
 3. Creating a teacher using Ajax XHR request.
 4. CURL POST request for JSON data test during insert (Error prone).
+
+---
+
+### Initiatives covered in C3
+
+1. The server rendered cycle while updating a teacher.
+2. JS (client-side) validation while updating a teacher using the form.
+3. Updating a teacher using Ajax XHR request.
+4. Wireframes for possible features in the project.
+5. Server side validation (Not that proper).
+
+Also, fixed the server rendered cycle for the add feature of a teacher.
