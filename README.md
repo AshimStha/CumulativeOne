@@ -8,7 +8,7 @@ This documentation outlines the server-rendered cycles that occur when a teacher
 
 ## Teacher Addition
 
-![Server Render Cycle while adding teacher](/_readme/Teacher_add.png)
+![Server Render Cycle while adding teacher](Teacher_Add.png)
 
 
 
