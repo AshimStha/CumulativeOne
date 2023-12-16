@@ -55,6 +55,5 @@ This documentation outlines the features for the cumulative assignments of C#.
 2. JS (client-side) validation while updating a teacher using the form.
 3. Updating a teacher using Ajax XHR request.
 4. Wireframes for possible features in the project.
-5. Server side validation (Not that proper).
 
 Also, fixed the server rendered cycle for the add feature of a teacher.
