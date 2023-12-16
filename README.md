@@ -2,23 +2,13 @@
 
 **Overview**
 
-This documentation outlines the server-rendered cycles that occur when a teacher is added or removed from the system. The process involves handling both the addition and removal scenarios separately.
+This documentation outlines the server-rendered cycles that occur when a teacher is added or removed from the system.
 
 ---
 
 ## Teacher Addition
 
-When a teacher is added, the process commences with user interaction through the application interface. Users input relevant teacher information in a designated form. There could also be client-side validation for the form which is then submitted to the server through a specific endpoint or route. 
-
-Upon receiving the form data, the server performs server-side validation to guarantee data integrity. After successful validation, the server interacts with the database to store the validated teacher information, creating a new teacher record. Subsequently, the server updates the relevant views or templates to reflect the addition of the new teacher.
-
-### Cycle 1
-
-The first cycle of this process is the part till where the user fills in the create user form and hits sumbit.In context of this assignment, the user is first shown the main index page with the options to view the teacher or the students available in the system (DB). The user then fills in the form found in the New.cshtml view which can be accessed using the 'Add a Teacher' button and the data is validated before being processed further. 
-
-### Cycle 2
-
-After filling in the form, the Teacher WebAPI controller comes into play where the add method is used to define the inputs for the new teacher object and then the AddTeacher method in the TeacherData API controller is accessed. This method uses the Http POST method to define the attributes for the object and moves to the next method that is responsible for the data entry into the DB. This is also done utilizing the Http POST request as we are passing information over the web server into the DB. The view with the teachers list is then shown after the process is completed.
+![Server Render Cycle while adding teacher](Teacher_add.jpg)
 
 
 
