@@ -6,7 +6,7 @@
 }
 
 <!--JS for client side form validation while updating-->
-<!--<script>
+<script>
     window.onload = processUpdateForm;
 
     function processUpdateForm() {
@@ -71,7 +71,7 @@
             }
         }
     }
-</script>-->
+</script>
 
 <h2>Update Teacher</h2>
 
@@ -96,12 +96,6 @@
         <input type="text" value="@Model.EmpNumber" class="form-control" id="EmpNumber" aria-describedby="textHelp" name="EmpNumber">
         <span class="errorMsg" id="EmpNumError">Invalid employee number!</span>
     </div>
-    <!--<div class="mb-3">
-        <label for="HireDate" class="form-label">Hiredate</label>
-        <!--The text field is used here because when date was used, the DB data was not being rendered.-->
-    <!--<input type="text" value="@Model.HireDate?.ToString(" yyyy-MM-dd")" class="form-control" id="HireDate" aria-describedby="textHelp" name="HireDate">
-        <span class="errorMsg" id="HireDateError">Invalid hiredate!</span>
-    </div>-->
     <div class="mb-3">
         <label for="Salary" class="form-label">Salary</label>
         <input type="number" value="@Model.Salary" step="any" class="form-control" id="Salary" aria-describedby="textHelp" name="Salary">

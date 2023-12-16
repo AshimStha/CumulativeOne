@@ -350,6 +350,8 @@ namespace CumulativeOne.Controllers
 
             // Closing the DB connection
             Conn.Close();
+
+            return result;
         }
     }
 }
