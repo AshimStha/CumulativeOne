@@ -1,13 +1,15 @@
-﻿
+﻿<!--Using the Teacher model class-->﻿
+@model CumulativeOne.Models.Teacher
+
 @{
-    ViewBag.Title = "New Teacher";
+    ViewBag.Title = "Update Teacher";
 }
 
-<!--JS for client side form validation-->
-<script>
-    window.onload = processForm;
+<!--JS for client side form validation while updating-->
+<!--<script>
+    window.onload = processUpdateForm;
 
-    function processForm() {
+    function processUpdateForm() {
         var formhandle = document.forms.teacherForm;
 
         var fError = document.getElementById("FnameError");
@@ -18,9 +20,9 @@
         // Defining a regular expression for a valid salary number
         const numberRegex = /^\d+$/;
 
-        formhandle.onsubmit = ValidateForm;
+        formhandle.onsubmit = ValidateUpdateForm;
 
-        function ValidateForm() {
+        function ValidateUpdateForm() {
             var fInput = formhandle.TeacherFname;
             var lInput = formhandle.TeacherLname;
             var EmpInput = formhandle.EmpNumber;
@@ -69,37 +71,41 @@
             }
         }
     }
-</script>
+</script>-->
 
-
-<h2>New Teacher</h2>
+<h2>Update Teacher</h2>
 
 <!--Link to go back to the teachers list-->
 <!--The href link to the file on the project-->
-<a class="btn btn-secondary mb-5 mt-3" href="/Teacher/List">Back To Teachers</a>
+<a class="btn btn-secondary mb-5 mt-3" href="/Teacher/Show/@Model.TeacherId">Back To Teacher</a>
 
-<!--Form to add a new teacher-->
-<form method="POST" action="/Teacher/Add" name="teacherForm">
+<!--Form to update the selected teacher-->
+<form method="POST" action="/Teacher/Update/@Model.TeacherId" name="teacherForm">
     <div class="mb-3">
         <label for="TeacherFname" class="form-label">Firstname</label>
-        <input type="text" class="form-control" id="TeacherFname" aria-describedby="textHelp" name="TeacherFname">
+        <input type="text" value="@Model.TeacherFname" class="form-control" id="TeacherFname" aria-describedby="textHelp" name="TeacherFname">
         <span class="errorMsg" id="FnameError">Invalid firstname!</span>
     </div>
     <div class="mb-3">
         <label for="TeacherLname" class="form-label">Lastname</label>
-        <input type="text" class="form-control" id="TeacherLname" aria-describedby="textHelp" name="TeacherLname">
+        <input type="text" value="@Model.TeacherLname" class="form-control" id="TeacherLname" aria-describedby="textHelp" name="TeacherLname">
         <span class="errorMsg" id="LnameError">Invalid lastname!</span>
     </div>
     <div class="mb-3">
         <label for="EmpNumber" class="form-label">Employee No.</label>
-        <input type="text" class="form-control" id="EmpNumber" aria-describedby="textHelp" name="EmpNumber">
+        <input type="text" value="@Model.EmpNumber" class="form-control" id="EmpNumber" aria-describedby="textHelp" name="EmpNumber">
         <span class="errorMsg" id="EmpNumError">Invalid employee number!</span>
     </div>
+    <!--<div class="mb-3">
+        <label for="HireDate" class="form-label">Hiredate</label>
+        <!--The text field is used here because when date was used, the DB data was not being rendered.-->
+    <!--<input type="text" value="@Model.HireDate?.ToString(" yyyy-MM-dd")" class="form-control" id="HireDate" aria-describedby="textHelp" name="HireDate">
+        <span class="errorMsg" id="HireDateError">Invalid hiredate!</span>
+    </div>-->
     <div class="mb-3">
         <label for="Salary" class="form-label">Salary</label>
-        <input type="number" step="any" class="form-control" id="Salary" aria-describedby="textHelp" name="Salary">
+        <input type="number" value="@Model.Salary" step="any" class="form-control" id="Salary" aria-describedby="textHelp" name="Salary">
         <span class="errorMsg" id="SalaryError">Invalid salary!</span>
     </div>
-    <button id="teacher_submit_btn" type="submit" class="btn btn-danger">Add Teacher</button>
+    <button id="teacher_submit_btn" type="submit" class="btn btn-danger">Update Teacher</button>
 </form>
-

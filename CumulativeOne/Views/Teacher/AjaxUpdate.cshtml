@@ -1,0 +1,70 @@
+﻿<!--Using the Teacher model class-->﻿
+@model CumulativeOne.Models.Teacher
+
+@{
+    ViewBag.Title = "AJAX Update";
+}
+
+<div id="containershow">
+    <nav>
+        <a class="btn btn-primary navlink" href="/Teacher/List">Back To Teachers</a>
+    </nav>
+    @{
+        /* AJAX Request to update a teacher */
+        /* No form submission needed */
+        /* button onclick will handle form submission */
+        /* Each item has an ID for validation && ajax submission */
+    }
+    <section class="wrapper">
+        <h1>Update @Model.TeacherFname @Model.TeacherLname</h1>
+
+        <!--Form to update a new teacher-->
+        <form id="update-form" name="teacherForm">
+            <div class="form-input">
+                <label for="TeacherFname" class="form-label">Firstname</label>
+                <input type="text"
+                       class="form-control"
+                       id="TeacherFname"
+                       value="@Model.TeacherFname"
+                       aria-describedby="textHelp"
+                       name="TeacherFname" />
+            </div>
+
+            <div class="form-input">
+                <label for="TeacherLname" class="form-label">Lastname</label>
+                <input type="text"
+                       class="form-control"
+                       id="TeacherLname"
+                       value="@Model.TeacherLname"
+                       aria-describedby="textHelp"
+                       name="TeacherLname" />
+            </div>
+
+            <div class="form-input">
+                <label for="EmpNumber" class="form-label">Employee No.</label>
+                <input type="text"
+                       class="form-control"
+                       id="EmpNumber"
+                       value="@Model.EmpNumber"
+                       aria-describedby="textHelp"
+                       name="EmpNumber" />
+            </div>
+
+            <div class="form-input">
+                <label for="Salary" class="form-label">Salary</label>
+                <input type="number"
+                       step="any"
+                       class="form-control"
+                       id="Salary"
+                       value="@Model.Salary"
+                       aria-describedby="textHelp"
+                       name="Salary" />
+            </div>
+        </form>
+        @{
+            //UpdateTeacher() is a JS method defined in /Scripts/app.js
+        }
+        <button id="update-btn" onclick="UpdateTeacher(@Model.TeacherId);">Update Teacher</button>
+    </section>
+
+</div>

@@ -27,7 +27,7 @@ namespace CumulativeOne.Controllers
         /// </returns>
         [HttpGet]
         [Route("api/TeacherData/ListTeachers/{SearchKey}")]
-        public IEnumerable<Teacher> ListTeachers(string SearchKey=null)
+        public IEnumerable<Teacher> ListTeachers(string SearchKey = null)
         {
             // Creating an instance for the connection
             MySqlConnection Conn = School.AccessDatabase();
@@ -62,7 +62,7 @@ namespace CumulativeOne.Controllers
                 int TeacherID = Convert.ToInt32(ResultSet["teacherid"]);
                 string TeacherFName = ResultSet["teacherfname"].ToString();
                 string TeacherLName = ResultSet["teacherlname"].ToString();
-                string EmpNo = ResultSet["employeenumber"].ToString() ;
+                string EmpNo = ResultSet["employeenumber"].ToString();
                 DateTime HireDate = (DateTime)ResultSet["hiredate"];
                 int Salary = Convert.ToInt32(ResultSet["salary"]);
 
@@ -206,7 +206,7 @@ namespace CumulativeOne.Controllers
         [EnableCors(origins: "*", methods: "*", headers: "*")]
         // The object is from the Teacher class
         // FromBody means we are getting the data from the body of the HTTP request
-        public void AddTeacher ([FromBody] Teacher NewTeacher)
+        public void AddTeacher([FromBody] Teacher NewTeacher)
         {
             // Getting the current date in a variable
             DateTime now = DateTime.Now;
@@ -261,7 +261,7 @@ namespace CumulativeOne.Controllers
 
         [HttpPost]
         [Route("api/TeacherData/DeleteTeacher/{teacherId}")]
-        public void DeleteTeacher (int teacherId)
+        public void DeleteTeacher(int teacherId)
         {
             // Creating an instance of a DB connection
             MySqlConnection Conn = School.AccessDatabase();
@@ -288,6 +288,61 @@ namespace CumulativeOne.Controllers
             cmd.Parameters.AddWithValue("@id", teacherId);
 
             // Creating a prepared version of the sql query
+            cmd.Prepare();
+
+            // Using this function to just execute the information and not to read it and also returns the number of rows affected
+            cmd.ExecuteNonQuery();
+
+            // Closing the DB connection
+            Conn.Close();
+        }
+
+        // Method to update a teacher
+
+        /// <summary>
+        /// A method to update the selected teacher and store in the DB. It is non-deterministic
+        /// </summary>
+        /// <param name="TeacherInfo">An object with fields that map to the columns of the teacher's table.</param>
+        /// <example>
+        /// POST api/TeacherData/UpdateTeacher/{id}
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"TeacherFname":"John",
+        ///	"TeacherLname":"Doe",
+        ///	"EmpNumber":"T5000",
+        ///	"Salary":"50.55"
+        /// }
+        /// </example>
+        [HttpPost]
+        [EnableCors(origins: "*", methods: "*", headers: "*")]
+
+        public int UpdateTeacher(int id, [FromBody] Teacher TeacherInfo)
+        {
+            int result = 0;
+
+            if(string.IsNullOrEmpty(TeacherInfo.TeacherFname) ||
+                string.IsNullOrEmpty(TeacherInfo.TeacherLname) ||
+                TeacherInfo.Salary < 0 || string.IsNullOrEmpty(TeacherInfo.EmpNumber)) 
+            {
+                return result;
+            }
+
+            // Creating an instance of the DB connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            // Opening the connection between the web server and database
+            Conn.Open();
+
+            // Establishing a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL query to update the selected teacher
+            cmd.CommandText = "UPDATE Teachers SET teacherfname=@TeacherFname, teacherlname=@TeacherLname, employeenumber=@EmpNumber, salary=@Salary  WHERE teacherid=@TeacherId";
+            cmd.Parameters.AddWithValue("@TeacherFname", TeacherInfo.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", TeacherInfo.TeacherLname);
+            cmd.Parameters.AddWithValue("@EmpNumber", TeacherInfo.EmpNumber);
+            cmd.Parameters.AddWithValue("@Salary", TeacherInfo.Salary);
+            cmd.Parameters.AddWithValue("@TeacherId", id);
             cmd.Prepare();
 
             // Using this function to just execute the information and not to read it and also returns the number of rows affected

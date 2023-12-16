@@ -1,0 +1,28 @@
+﻿<!--Using the Teacher model class-->﻿
+@model CumulativeOne.Models.Student
+@{
+    ViewBag.Title = "Update Student";
+}
+
+<h2>Update Student</h2>
+
+<!--Link to go back to the students list-->
+<!--The href link to the file on the project-->
+<a class="btn btn-secondary mb-5 mt-3" href="/Student/Show/@Model.StudentId">Back To Student</a>
+
+<!--Form to update the selected student-->
+<form method="POST" action="/Student/Update/@Model.StudentId" name="studentForm">
+    <div class="mb-3">
+        <label for="StudentFname" class="form-label">Firstname</label>
+        <input type="text" class="form-control" id="StudentFname" value="@Model.StudentFname" aria-describedby="textHelp" name="StudentFname">
+    </div>
+    <div class="mb-3">
+        <label for="StudentLname" class="form-label">Lastname</label>
+        <input type="text" class="form-control" id="StudentLname" value="@Model.StudentLname" aria-describedby="textHelp" name="StudentLname">
+    </div>
+    <div class="mb-3">
+        <label for="StdNumber" class="form-label">Student No.</label>
+        <input type="text" class="form-control" id="StdNumber" value="@Model.StdNumber" aria-describedby="textHelp" name="StdNumber">
+    </div>
+    <button id="student_update_btn" type="submit" class="btn btn-primary">Submit</button>
+</form>

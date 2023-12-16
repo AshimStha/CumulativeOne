@@ -164,10 +164,10 @@ namespace CumulativeOne.Controllers
             // Creating an instance of the TeacherDataController
             TeacherDataController controller = new TeacherDataController();
 
-            // Using the method of the controller to find the teacher with the id and storing in an object instance of the model class
+            // Using the method of the API controller to find the teacher with the id and storing in an object instance of the model class
             Teacher SelectedTeacher = controller.FindTeacher(id);
 
-            // Returning the view with the teacher  data
+            // Returning the view with the teacher data
             return View(SelectedTeacher);
         }
 
@@ -197,6 +197,99 @@ namespace CumulativeOne.Controllers
 
             // Redirecting to the List view
             return RedirectToAction("List");
+        }
+
+        // Method to navigate to the update form view for teachers
+
+        /// <summary>
+        /// A method to navigate to the update/edit form with the data of the selected teacher
+        /// </summary>
+        /// <param name="id">The selected teacher id</param>
+        /// <returns>
+        /// The view with the update form and the object details 
+        /// </returns>
+        /// <example>
+        ///     GET: /Teacher/Update/{id}
+        ///     Route to /Views/Teacher/Update.cshtml
+        /// </example>
+        /// <example>
+        ///     /Teacher/Update/7 -> Update.cshtml with details of Shannon Barton
+        /// </example>
+
+        public ActionResult Update(int id)
+        {
+            // Creating an instance of the API controller
+            TeacherDataController Controller = new TeacherDataController();
+
+            // Using the method of the API controller to find the teacher with the id and storing it in an object instance of the model class
+            Teacher selectedTeacher = Controller.FindTeacher(id);
+
+            // Returning the view update.cshtml with the teacher instance data
+            return View(selectedTeacher);
+        }
+
+        // Method to access the view for the AJAX update feature
+
+        /// <summary>
+        /// A method to access the view with the form to update a selected teacher and show the details in
+        /// the input fields
+        /// </summary>
+        /// <returns>
+        /// The view with the update teacher form
+        /// </returns>
+        /// 
+
+        //GET : /Teacher/AjaxUpdate/{id}
+        public ActionResult AjaxUpdate(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+        // Function to update the teacher data 
+
+        /// <summary>
+        /// A function that receives a POST request with the data of an existing teacher with the new values from the update
+        /// form and redirects to the teacher details page using the API
+        /// </summary>
+        /// <param name="id">Id of the Teacher to be updated</param>
+        /// <param name="EmpNumber">The employee number of the teacher</param>
+        /// <param name="TeacherFname">The first name for the teaher</param>
+        /// <param name="TeacherLname">The last name for the teacher</param>
+        /// <param name="Salary">The salary for the teacher</param>
+        /// <returns>A dynamic webpage which provides the current information of the teacher.</returns>
+        /// <example>
+        /// POST : /Teacher/Update/6
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"TeacherFname":"John",
+        ///	"TeacherLname":"Doe",
+        ///	"EmpNumber":"T5634",
+        ///	"Salary":"40.45"
+        /// }
+        /// </example>
+        [HttpPost]
+        public ActionResult Update(int id, string TeacherFname, string TeacherLname, string EmpNumber, int Salary)
+        {
+            // Creating a new teacher instance
+            Teacher TeacherInfo = new Teacher();
+
+            // Assigning the values from the update form to the object properties
+            TeacherInfo.TeacherFname = TeacherFname;
+            TeacherInfo.TeacherLname = TeacherLname;
+            TeacherInfo.EmpNumber = EmpNumber;
+            TeacherInfo.Salary = Salary;
+
+            // Creating a new instance for the teacher API controller
+            TeacherDataController controller = new TeacherDataController();
+
+            // Accessing the UpdateTeacher method in the API controller to update the selected teacher
+            controller.UpdateTeacher(id, TeacherInfo);
+
+            // Redirecting to the teacher details page for the selected teacher
+            return RedirectToAction("Show/" + id);
         }
     }
 }

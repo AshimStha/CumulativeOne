@@ -172,5 +172,76 @@ namespace CumulativeOne.Controllers
             // Redirecting to the List view
             return RedirectToAction("List");
         }
+
+        // Method to navigate to the update form view for students
+
+        /// <summary>
+        /// A method to navigate to the update/edit form with the data of the selected student
+        /// </summary>
+        /// <param name="id">The selected student id</param>
+        /// <returns>
+        /// The view with the update form and the object details 
+        /// </returns>
+        /// <example>
+        ///     GET: /Student/Update/{id}
+        ///     Route to /Views/Student/Update.cshtml
+        /// </example>
+        /// <example>
+        ///     /Student/Update/2 -> Update.cshtml with details of Jennifer Faulkner
+        /// </example>
+
+        public ActionResult Update(int id)
+        {
+            // Creating an instance of the API controller
+            StudentDataController Controller = new StudentDataController();
+
+            // Using the method of the API controller to find the student with the id and storing it in an object instance of the model class
+            Student selectedStudent = Controller.FindStudent(id);
+
+            // Returning the view update.cshtml with the student instance data
+            return View(selectedStudent);
+        }
+
+        // Function to update the student data 
+
+        /// <summary>
+        /// A function that receives a POST request with the data of an existing student with the new values from the update
+        /// form and redirects to the student details page using the API
+        /// </summary>
+        /// <param name="id">Id of the Student to be updated</param>
+        /// <param name="StdNumber">The student number of the student</param>
+        /// <param name="StudentFname">The first name for the student</param>
+        /// <param name="StudentLname">The last name for the student</param>
+        /// <returns>A dynamic webpage which provides the current information of the student.</returns>
+        /// <example>
+        /// POST : /Student/Update/2
+        /// 
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"StudentFname":"Jeremy",
+        ///	"StudentLname":"Miller",
+        ///	"StdNumber":"N26635",
+        /// }
+        /// </example>
+        [HttpPost]
+        public ActionResult Update(int id, string StudentFname, string StudentLname, string StdNumber)
+        {
+            // Creating a new student instance
+            Student StudentInfo = new Student();
+
+            // Assigning the values from the update form to the object properties
+            StudentInfo.StudentFname = StudentFname;
+            StudentInfo.StudentLname = StudentLname;
+            StudentInfo.StdNumber = StdNumber;
+
+            // Creating a new instance for the student API controller
+            StudentDataController controller = new StudentDataController();
+
+            // Accessing the UpdateStudent method in the API controller to update the selected student
+            controller.UpdateStudent(id, StudentInfo);
+
+            // Redirecting to the student details page for the selected student
+            return RedirectToAction("Show/" + id);
+        }
     }
 }

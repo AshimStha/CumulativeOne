@@ -48,7 +48,61 @@ function AddTeacher() {
             window.location.href = "http://localhost:61277/Teacher/List";
         }
         else {
-            concole.log("Unsuccessful!")
+            console.log("Unsuccessful!")
+        }
+
+    }
+    //POST information sent through the .send() method
+    rq.send(JSON.stringify(TeacherData));
+
+}
+
+
+function UpdateTeacher(TeacherId) {
+
+    //goal: send a request which looks like this:
+    //POST : http://localhost:xxx/api/TeacherData/UpdateTeacher
+    //with POST data of teacherfname, teacherlname, empnumber, hiredate and salary.
+
+    // setting up the URL for the request
+    var URL = "http://localhost:61277/api/TeacherData/UpdateTeacher/"+TeacherId;
+
+    // creating an XML HTTP request object
+    var rq = new XMLHttpRequest();
+
+    // where is this request sent to?
+    // is the method GET or POST?
+    // what should we do with the response?
+
+    // Fetching the HTML DOM elements for the error span fields
+    var teacherFname = document.getElementById("TeacherFname").value;
+    var teacherLname = document.getElementById("TeacherLname").value;
+    var teacherEmpNum = document.getElementById("EmpNumber").value;
+    var teacherSalary = document.getElementById("Salary").value;
+
+
+
+    var TeacherData = {
+        "TeacherFname": teacherFname,
+        "TeacherLname": teacherLname,
+        "EmpNumber": teacherEmpNum,
+        "Salary": teacherSalary
+    };
+
+
+    rq.open("POST", URL, true);
+    rq.setRequestHeader("Content-Type", "application/json");
+    rq.onreadystatechange = function () {
+        //ready state should be 4 AND status should be 200
+        if (rq.readyState == 4 && rq.status == 204) {
+            //request is successful and the request is finished
+            console.log("Successful!");
+
+            // redirecting back to the list
+            window.location.href = "http://localhost:61277/Teacher/Show/"+TeacherId;
+        }
+        else {
+            console.log("Unsuccessful!")
         }
 
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CumulativeOne.Controllers
 {
@@ -255,6 +256,48 @@ namespace CumulativeOne.Controllers
             cmd.Parameters.AddWithValue("@id", studentId);
 
             // Creating a prepared version of the sql query
+            cmd.Prepare();
+
+            // Using this function to just execute the information and not to read it and also returns the number of rows affected
+            cmd.ExecuteNonQuery();
+
+            // Closing the DB connection
+            Conn.Close();
+        }
+
+        // Method to update a student
+
+        /// <summary>
+        /// A method to update the selected student and store in the DB. It is non-deterministic
+        /// </summary>
+        /// <param name="StudentInfo">An object with fields that map to the columns of the student's table.</param>
+        /// <example>
+        /// POST api/StudentData/UpdateStudent/{id}
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"StudentFname":"Jeremy",
+        ///	"StudentLname":"Miller",
+        ///	"StdNumber":"N235",
+        /// }
+        /// </example>
+        [HttpPost]
+        public void UpdateStudent(int id, [FromBody] Student StudentInfo)
+        {
+            // Creating an instance of the DB connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            // Opening the connection between the web server and database
+            Conn.Open();
+
+            // Establishing a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL query to update the selected student
+            cmd.CommandText = "UPDATE Students SET studentfname=@StudentFname, studentlname=@StudentLname, studentnumber=@StdNumber  WHERE studentid=@StudentId";
+            cmd.Parameters.AddWithValue("@StudentFname", StudentInfo.StudentFname);
+            cmd.Parameters.AddWithValue("@StudentLname", StudentInfo.StudentLname);
+            cmd.Parameters.AddWithValue("@StdNumber", StudentInfo.StdNumber);
+            cmd.Parameters.AddWithValue("@StudentId", id);
             cmd.Prepare();
 
             // Using this function to just execute the information and not to read it and also returns the number of rows affected

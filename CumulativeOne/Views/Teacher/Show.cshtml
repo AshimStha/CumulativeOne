@@ -2,7 +2,7 @@
 @model CumulativeOne.Models.Teacher
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Teacher Details";
 }
 
 <!--Link to go back to the teachers list-->
@@ -14,17 +14,29 @@
         <h5 class="card-header"><span class="fw-bold">Employee no:</span> @Model.EmpNumber</h5>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h5 class="card-title text-danger fs-3 pb-3">@Model.TeacherFname @Model.TeacherLname</h5>
                 </div>
-                <div class="col-md-6 d-flex justify-content-end align-items-center">
+
+                <!--Delete Teacher-->
+                <div class="col-md-2 d-flex justify-content-end align-items-center">
                     <a href="/Teacher/DeleteConfirm/@Model.TeacherId" class="btn btn-danger">Delete</a>
+                </div>
+
+                <!--Update Teacher-->
+                <div class="col-md-2 d-flex justify-content-start align-items-center">
+                    <a href="/Teacher/Update/@Model.TeacherId" class="btn btn-primary">Update</a>
                 </div>
             </div>
             <p class="card-text"><span class="fw-bold">Teacher ID:</span> @Model.TeacherId</p>
             <p class="card-text"><span class="fw-bold">Hire date:</span> @Model.HireDate</p>
             <p class="card-text"><span class="fw-bold">Salary:</span> @Model.Salary</p>
             <a href="#" class="btn btn-primary">Contact</a>
+
+            <!--Link to update a teacher using AJAX-->
+            <div class="col-md-12 d-flex justify-content-start align-items-center mt-3">
+                <a class="btn btn-secondary" href="/Teacher/AjaxUpdate/@Model.TeacherId">AJAX Update</a>
+            </div>
         </div>
     </div>
 </div>
